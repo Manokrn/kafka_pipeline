@@ -1,13 +1,16 @@
+# consumer.py
 from kafka import KafkaConsumer
+import json
 
 consumer = KafkaConsumer(
-    'my-topic',
+    'click-events',
     bootstrap_servers='localhost:9092',
+    value_deserializer=lambda m: json.loads(m.decode('utf-8')),
     auto_offset_reset='earliest',
-    group_id='mano-group',
-    value_deserializer=lambda m: m.decode('utf-8')
+    group_id='click-group'
 )
 
-print("📥 Listening for messages...")
-for msg in consumer:
-    print(f"🔔 Received: {msg.value}")
+print("Listening for click events...")
+
+for message in consumer:
+    print(f"👆 Click received: {message.value}")

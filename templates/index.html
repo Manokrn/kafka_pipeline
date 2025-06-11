@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kafka Click Tracker</title>
+</head>
+<body>
+    <h1>Click the button to send a Kafka event</h1>
+    <button onclick="sendClick()">Click Me</button>
+
+    <script>
+        function sendClick() {
+            fetch('/click', {
+                method: 'POST'
+            }).then(response => console.log("Click sent"));
+        }
+    </script>
+</body>
+</html>
